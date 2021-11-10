@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using SK.ER.Utilities.General;
 using SK.ER.Utilities.Keys;
 using SK.ERP.Entities.DataAccess.Entities;
+using SK.ERP.Entities.DataAccess.Persona.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,19 @@ namespace SK.ERP.SERVICE.Controllers
             using (var BL = new SK.ERP.Business.DataAccess.PersonaBL())
             {
                 var data = BL.GetPersona();
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpPost]
+        [Route("SavePersona")]
+        public IActionResult SavePersona(SavePersonaRequest ResquestBE)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.PersonaBL())
+            {
+                var data = BL.SavePersona(ResquestBE);
                 GenericResponse.Code = Enums.eCode.OK;
                 GenericResponse.Data = data;
             }

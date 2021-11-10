@@ -1,4 +1,5 @@
-﻿using SK.ERP.Entities.DataAccess.Persona.Response;
+﻿using SK.ERP.Entities.DataAccess.Persona.Request;
+using SK.ERP.Entities.DataAccess.Persona.Response;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,13 @@ namespace SK.ERP.Business.DataAccess
             using (var DA = new SK.ERP.DataAccess.PersonaDA())
             {
                 return DA.GetPersona();
+            }
+        }
+        public bool SavePersona(SavePersonaRequest RequestBE)
+        {
+            using (var DA = new SK.ERP.DataAccess.PersonaDA())
+            {
+                return DA.SavePersona(RequestBE);
             }
         }
     }

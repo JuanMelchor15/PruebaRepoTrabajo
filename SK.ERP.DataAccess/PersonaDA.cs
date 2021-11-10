@@ -1,7 +1,10 @@
 ﻿using SK.ER.Utilities.General;
+using SK.ERP.Entities.DataAccess.Persona.Request;
 using SK.ERP.Entities.DataAccess.Persona.Response;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace SK.ERP.DataAccess
@@ -41,6 +44,28 @@ namespace SK.ERP.DataAccess
                 catch (Exception ex)
                 {
                     throw ex;
+                }
+            }
+        }
+        public bool SavePersona(SavePersonaRequest RequestBE)
+        {
+            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
+            {
+                try
+                {
+                    var paramaters = new SqlParameter[]
+                    {
+                        new SqlParameter{ParameterName="@Nombre",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Nombre},
+                        new SqlParameter{ParameterName="@ApellidoPat",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.ApellidoMar},
+                        new SqlParameter{ParameterName="@ApellidoMat",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.ApellidoPat},
+                        new SqlParameter{ParameterName="@Telefono",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Telefono},
+                    };
+                    var Dr = Ado.ExecNonQueryProc("usp_RegistroPersona", paramaters);
+                    return true;
+                }
+                catch (Exception Ex)
+                {
+                    throw Ex;
                 }
             }
         }
