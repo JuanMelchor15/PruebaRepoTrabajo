@@ -6,7 +6,7 @@ namespace SK.ER.Utilities.Keys
 {
     public static class Constants
     {
-
+        public const string Claim_userCode = "userCode";
     }
     public static class Enums
     {
