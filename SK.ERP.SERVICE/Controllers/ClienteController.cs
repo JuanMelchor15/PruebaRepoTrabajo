@@ -1,0 +1,141 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using SK.ER.Utilities.General;
+using SK.ER.Utilities.Keys;
+using SK.ERP.Entities.DataAccess.Cliente.Request;
+using SK.ERP.Entities.DataAccess.Entities;
+using SK.ERP.Entities.DataAccess.Persona.Request;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+
+namespace SK.ERP.SERVICE.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ClienteController : ControllerBase
+    {
+        private readonly IConfiguration Configuration;
+        private readonly ILogger Logger;
+        private readonly IMapper _mapper;
+        public ClienteController(IConfiguration IConfiguration, ILoggerFactory LoggerFactory, IMapper mapper)
+        {
+            Configuration = IConfiguration;
+            Logger = LoggerFactory.CreateLogger<ClienteController>();
+            GeneralModel.ConnectionString = Configuration["ConnectionStrings:SK"];
+            _mapper = mapper;
+        }
+        [HttpGet]
+        [Route("GetCliente")]
+        public IActionResult GetCliente()
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.GetCliente();
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpGet]
+        [Route("GetClienteDesc")]
+        public IActionResult GetClienteDesc()
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.GetClienteDesac();
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpGet]
+        [Route("BuscarCliente/{Codigo?}")]
+        public IActionResult BuscarCliente(string Codigo= "")
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.BuscarCliente(Codigo);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpGet]
+        [Route("BuscarClienteDesc/{Codigo?}")]
+        public IActionResult BuscarClienteDesc(string Codigo = "")
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.BuscarClienteDesc(Codigo);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpPost]
+        [Route("SaveCliente")]
+        public IActionResult SaveCliente(SaveClienteRequest ResquestBE)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.SaveCliente(ResquestBE);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpPost]
+        [Route("UpdateCliente")]
+        public IActionResult UpdateCliente(UpdateClienteRequest ResquestBE)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.UpdateCliente(ResquestBE);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpPost]
+        [Route("DeleteCliente")]
+        public IActionResult DeleteCliente(DeleteClienteRequest ResquestBE)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.DeleteCliente(ResquestBE);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpPost]
+        [Route("ActivateCliente")]
+        public IActionResult ActivateCliente(DeleteClienteRequest ResquestBE)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.ActivateCliente(ResquestBE);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+    }
+}

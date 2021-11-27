@@ -9,10 +9,6 @@ namespace SK.ERP.Entities.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
-        {
-            CreateMap<DtoSaveRegistroRequest, SaveRegistroRequest>();
-            CreateMap<SaveRegistroRequest, DtoSaveRegistroRequest>();
-        }
+       
     }
 }

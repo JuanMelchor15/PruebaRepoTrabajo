@@ -28,7 +28,7 @@ namespace SK.ERP.SERVICE.Controllers
         public RegistroController(IConfiguration IConfiguration, ILoggerFactory LoggerFactory, IMapper mapper)
         {
             Configuration = IConfiguration;
-            Logger = LoggerFactory.CreateLogger<PersonaController>();
+            Logger = LoggerFactory.CreateLogger<ClienteController>();
             GeneralModel.ConnectionString = Configuration["ConnectionStrings:SK"];
             _mapper = mapper;
         }

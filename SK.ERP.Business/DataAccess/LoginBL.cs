@@ -52,11 +52,11 @@ namespace SK.ERP.Business.DataAccess
                         //var ListRoles = UserBE.RolesApi;
                         var claimsUser = new List<Claim>
                                 {
-                                    new Claim(type:JwtRegisteredClaimNames.UniqueName,value: string.IsNullOrEmpty(LoginResponse.Correo) ? "Generic User" : LoginResponse.Correo),
-                                    new Claim(type:_options.ClaimsIdentity.UserIdClaimType,value:LoginResponse.Code),
+                                    //new Claim(type:JwtRegisteredClaimNames.UniqueName,value: string.IsNullOrEmpty(LoginResponse.Correo) ? "Generic User" : LoginResponse.Correo),
+                                    //new Claim(type:_options.ClaimsIdentity.UserIdClaimType,value:LoginResponse.Code),
                                     //new Claim(type: Constants.Claim_dataBussinessType, value: LoginResponse.BussinessType.ToString()),
                                     //new Claim(type: Constants.Claim_tokenBAZ, value: tokenBAZ),
-                                    new Claim(type: Constants.Claim_userCode, value: LoginResponse.Code),
+                                    //new Claim(type: Constants.Claim_userCode, value: LoginResponse.Code),
                                     //new Claim(type: Constants.Claim_userName, value: LoginResponse.UserName),
                                     new Claim(type:JwtRegisteredClaimNames.Jti,value:Guid.NewGuid().ToString())
                                 };
@@ -75,7 +75,6 @@ namespace SK.ERP.Business.DataAccess
                         var refreshToken = new RefreshTokenBE
                         {
                             JwtId = token.Id,
-                            UserId = LoginResponse.Code,
                             CreationDate = FechaActualLima,
                             ExpiryDate = FechaActualLima.AddMonths(6),
                             Token = Guid.NewGuid().ToString()

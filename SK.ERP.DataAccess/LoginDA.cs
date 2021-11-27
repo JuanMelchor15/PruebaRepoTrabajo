@@ -24,7 +24,7 @@ namespace SK.ERP.DataAccess
                     LoginResponse Entity = null;
                     var Paramaters = new SqlParameter[]
                     {
-                        new SqlParameter{ParameterName="@Usuario",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Usuario},
+                        new SqlParameter{ParameterName="@NombreUsuario",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Usuario},
                         new SqlParameter{ParameterName="@Contraseña",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Contraseña},
                     };
                     var Dr = Ado.ExecDataReaderProc("usp_Login", Paramaters);
@@ -33,10 +33,7 @@ namespace SK.ERP.DataAccess
                         while (Dr.Read())
                         {
                             Entity = new LoginResponse();
-                            if (Dr["Usuario"] != DBNull.Value) { Entity.Usuario = (string)Dr["Usuario"]; }
-                            if (Dr["Telefono"] != DBNull.Value) { Entity.Telefono = (string)Dr["Telefono"]; }
-                            if (Dr["Correo"] != DBNull.Value) { Entity.Correo = (string)Dr["Correo"]; }
-                            if (Dr["Code"] != DBNull.Value) { Entity.Code = Convert.ToString(Dr["Code"]); }
+                            if (Dr["NombreEmpleado"] != DBNull.Value) { Entity.NombreEmpleado = (string)Dr["NombreEmpleado"]; }
                             break;
                         }
                         return Entity;

@@ -6,7 +6,9 @@ namespace SK.ER.Utilities.Keys
 {
     public static class Constants
     {
-        public const string Claim_userCode = "userCode";
+        public const string FORMAT_DATE = "{0:dd/MM/yyyy}";
+        public const string FORMAT_DATE_HOUR = "{0:dd/MM/yyyy H:mm}";
+        public const string FORMAT_HOUR = "{0:H:mm:ss}";
     }
     public static class Enums
     {
