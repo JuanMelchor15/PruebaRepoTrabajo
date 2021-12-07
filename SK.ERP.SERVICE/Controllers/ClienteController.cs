@@ -34,52 +34,13 @@ namespace SK.ERP.SERVICE.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        [Route("GetCliente")]
-        public IActionResult GetCliente()
+        [Route("BuscarCliente/{Estado}/{Codigo?}")]
+        public IActionResult BuscarCliente(int Estado, string Codigo= "")
         {
             var GenericResponse = new GenericResponseObject();
             using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
             {
-                var data = BL.GetCliente();
-                GenericResponse.Code = Enums.eCode.OK;
-                GenericResponse.Data = data;
-            }
-            return Ok(GenericResponse);
-        }
-        [HttpGet]
-        [Route("GetClienteDesc")]
-        public IActionResult GetClienteDesc()
-        {
-            var GenericResponse = new GenericResponseObject();
-            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
-            {
-                var data = BL.GetClienteDesac();
-                GenericResponse.Code = Enums.eCode.OK;
-                GenericResponse.Data = data;
-            }
-            return Ok(GenericResponse);
-        }
-        [HttpGet]
-        [Route("BuscarCliente/{Codigo?}")]
-        public IActionResult BuscarCliente(string Codigo= "")
-        {
-            var GenericResponse = new GenericResponseObject();
-            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
-            {
-                var data = BL.BuscarCliente(Codigo);
-                GenericResponse.Code = Enums.eCode.OK;
-                GenericResponse.Data = data;
-            }
-            return Ok(GenericResponse);
-        }
-        [HttpGet]
-        [Route("BuscarClienteDesc/{Codigo?}")]
-        public IActionResult BuscarClienteDesc(string Codigo = "")
-        {
-            var GenericResponse = new GenericResponseObject();
-            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
-            {
-                var data = BL.BuscarClienteDesc(Codigo);
+                var data = BL.BuscarCliente(Codigo,Estado);
                 GenericResponse.Code = Enums.eCode.OK;
                 GenericResponse.Data = data;
             }

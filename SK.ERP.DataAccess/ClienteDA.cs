@@ -17,73 +17,7 @@ namespace SK.ERP.DataAccess
             GC.SuppressFinalize(this);
         }
 
-        public List<ListaCliente> GetCliente()
-        {
-            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
-            {
-                try
-                {
-                    List<ListaCliente> List = new List<ListaCliente>();
-                    var Dr = Ado.ExecDataReaderProc("usp_GetCliente", null);
-                    {
-                        if (!Dr.HasRows) { return List; }
-                        while (Dr.Read())
-                        {
-                            var Entity = new ListaCliente();
-                            if (Dr["IdCliente"] != DBNull.Value) { Entity.IdCliente = (int)Dr["IdCliente"]; }
-                            if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
-                            if (Dr["Apellidos"] != DBNull.Value) { Entity.Apellidos = (string)Dr["Apellidos"]; }
-                            if (Dr["Dni"] != DBNull.Value) { Entity.Dni = (string)Dr["Dni"]; }
-                            if (Dr["Telefono"] != DBNull.Value) { Entity.Telefono = (string)Dr["Telefono"]; }
-                            if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
-                            if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
-                            if (Dr["Codigo"] != DBNull.Value) { Entity.Codigo = (string)Dr["Codigo"]; }
-                            List.Add(Entity);
-                        }
-                        return List;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
-        public List<ListaCliente> GetClienteDesac()
-        {
-            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
-            {
-                try
-                {
-                    List<ListaCliente> List = new List<ListaCliente>();
-                    var Dr = Ado.ExecDataReaderProc("usp_GetClienteDesc", null);
-                    {
-                        if (!Dr.HasRows) { return List; }
-                        while (Dr.Read())
-                        {
-                            var Entity = new ListaCliente();
-                            if (Dr["IdCliente"] != DBNull.Value) { Entity.IdCliente = (int)Dr["IdCliente"]; }
-                            if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
-                            if (Dr["Apellidos"] != DBNull.Value) { Entity.Apellidos = (string)Dr["Apellidos"]; }
-                            if (Dr["Dni"] != DBNull.Value) { Entity.Dni = (string)Dr["Dni"]; }
-                            if (Dr["Telefono"] != DBNull.Value) { Entity.Telefono = (string)Dr["Telefono"]; }
-                            if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
-                            if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
-                            if (Dr["Codigo"] != DBNull.Value) { Entity.Codigo = (string)Dr["Codigo"]; }
-                            List.Add(Entity);
-                        }
-                        return List;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
-        public List<ListaCliente> BuscarCliente(string Codigo)
+        public List<ListaCliente> BuscarCliente(string Codigo,int Estado)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
@@ -93,6 +27,7 @@ namespace SK.ERP.DataAccess
                     var Paramaters = new SqlParameter[]
                     {
                        new SqlParameter{ParameterName="@Codigo",SqlDbType=SqlDbType.VarChar,SqlValue=Codigo},
+                       new SqlParameter{ParameterName="@Estado",SqlDbType=SqlDbType.VarChar,SqlValue=Estado},
                     };
                     var Dr = Ado.ExecDataReaderProc("usp_BuscarCliente", Paramaters);
                     {
@@ -108,43 +43,8 @@ namespace SK.ERP.DataAccess
                             if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
                             if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
                             if (Dr["Codigo"] != DBNull.Value) { Entity.Codigo = (string)Dr["Codigo"]; }
-                            List.Add(Entity);
-                        }
-                        return List;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
-        public List<ListaCliente> BuscarClienteDesc(string Codigo)
-        {
-            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
-            {
-                try
-                {
-                    List<ListaCliente> List = new List<ListaCliente>();
-                    var Paramaters = new SqlParameter[]
-                    {
-                       new SqlParameter{ParameterName="@Codigo",SqlDbType=SqlDbType.VarChar,SqlValue=Codigo},
-                    };
-                    var Dr = Ado.ExecDataReaderProc("usp_BuscarClienteDesc", Paramaters);
-                    {
-                        if (!Dr.HasRows) { return List; }
-                        while (Dr.Read())
-                        {
-                            var Entity = new ListaCliente();
-                            if (Dr["IdCliente"] != DBNull.Value) { Entity.IdCliente = (int)Dr["IdCliente"]; }
-                            if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
-                            if (Dr["Apellidos"] != DBNull.Value) { Entity.Apellidos = (string)Dr["Apellidos"]; }
-                            if (Dr["Dni"] != DBNull.Value) { Entity.Dni = (string)Dr["Dni"]; }
-                            if (Dr["Telefono"] != DBNull.Value) { Entity.Telefono = (string)Dr["Telefono"]; }
-                            if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
-                            if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
-                            if (Dr["Codigo"] != DBNull.Value) { Entity.Codigo = (string)Dr["Codigo"]; }
+                            if (Dr["Estado"] != DBNull.Value) { Entity.Estado = (int)Dr["Estado"]; }
+                            if (Dr["FinSuscripcion"] != DBNull.Value) { Entity.FinSuscripcion = (int)Dr["FinSuscripcion"]; }
                             List.Add(Entity);
                         }
                         return List;

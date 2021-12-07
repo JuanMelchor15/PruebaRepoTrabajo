@@ -13,32 +13,11 @@ namespace SK.ERP.Business.DataAccess
         {
             GC.SuppressFinalize(this);
         }
-        public List<ListaCliente> GetCliente()
+        public List<ListaCliente> BuscarCliente(string Codigo, int Estado)
         {
             using (var DA = new SK.ERP.DataAccess.ClienteDA())
             {
-                return DA.GetCliente();
-            }
-        }
-        public List<ListaCliente> GetClienteDesac()
-        {
-            using (var DA = new SK.ERP.DataAccess.ClienteDA())
-            {
-                return DA.GetClienteDesac();
-            }
-        }
-        public List<ListaCliente> BuscarCliente(string Codigo)
-        {
-            using (var DA = new SK.ERP.DataAccess.ClienteDA())
-            {
-                return DA.BuscarCliente(Codigo);
-            }
-        }
-        public List<ListaCliente> BuscarClienteDesc(string Codigo)
-        {
-            using (var DA = new SK.ERP.DataAccess.ClienteDA())
-            {
-                return DA.BuscarClienteDesc(Codigo);
+                return DA.BuscarCliente(Codigo, Estado);
             }
         }
         public bool SaveCliente(SaveClienteRequest RequestBE)
