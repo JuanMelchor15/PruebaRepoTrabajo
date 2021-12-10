@@ -34,6 +34,19 @@ namespace SK.ERP.SERVICE.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        [Route("GetCliente/{IdCliente}")]
+        public IActionResult BuscarCliente(int IdCliente)
+        {
+            var GenericResponse = new GenericResponseObject();
+            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
+            {
+                var data = BL.GetListaClienteId(IdCliente);
+                GenericResponse.Code = Enums.eCode.OK;
+                GenericResponse.Data = data;
+            }
+            return Ok(GenericResponse);
+        }
+        [HttpGet]
         [Route("BuscarCliente/{Estado}/{Codigo?}")]
         public IActionResult BuscarCliente(int Estado, string Codigo= "")
         {
@@ -87,7 +100,7 @@ namespace SK.ERP.SERVICE.Controllers
         }
         [HttpPost]
         [Route("ActivateCliente")]
-        public IActionResult ActivateCliente(DeleteClienteRequest ResquestBE)
+        public IActionResult ActivateCliente(ActivarClienteRequestBE ResquestBE)
         {
             var GenericResponse = new GenericResponseObject();
             using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())

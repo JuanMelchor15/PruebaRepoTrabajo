@@ -57,7 +57,7 @@ namespace SK.ERP.Business.DataAccess
                                     //new Claim(type: Constants.Claim_dataBussinessType, value: LoginResponse.BussinessType.ToString()),
                                     //new Claim(type: Constants.Claim_tokenBAZ, value: tokenBAZ),
                                     //new Claim(type: Constants.Claim_userCode, value: LoginResponse.Code),
-                                    //new Claim(type: Constants.Claim_userName, value: LoginResponse.UserName),
+                                    new Claim(type: Constants.Claim_userName, value: LoginResponse.NombreEmpleado),
                                     new Claim(type:JwtRegisteredClaimNames.Jti,value:Guid.NewGuid().ToString())
                                 };
 
@@ -97,7 +97,7 @@ namespace SK.ERP.Business.DataAccess
                 {
                     return new AuthenticationResult
                     {
-                        Errors = new[] { "El Usuario " + RequestBE.Usuario + " No esta Registrado " }
+                        Errors = new[] { "Usuario o Contraseña Son Incorrectos" }
                     };
                 }
             }

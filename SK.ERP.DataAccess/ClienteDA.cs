@@ -1,5 +1,6 @@
 ﻿using SK.ER.Utilities.General;
 using SK.ERP.Entities.DataAccess.Cliente.Request;
+using SK.ERP.Entities.DataAccess.Cliente.Response;
 using SK.ERP.Entities.DataAccess.Persona.Request;
 using SK.ERP.Entities.DataAccess.Persona.Response;
 using System;
@@ -17,6 +18,48 @@ namespace SK.ERP.DataAccess
             GC.SuppressFinalize(this);
         }
 
+        public ListaCLienteId GetListaClienteId (int IdCliente)
+        {
+            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
+            {
+                try
+                {
+                    ListaCLienteId Entity = null;
+                    var Paramaters = new SqlParameter[]
+                    {
+                       new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=IdCliente },
+                      
+                    };
+                    var Dr = Ado.ExecDataReaderProc("usp_GetClienteId", Paramaters);
+                    {
+                        if (!Dr.HasRows) { return Entity; }
+                        while (Dr.Read())
+                        {
+                            Entity = new ListaCLienteId();
+                            
+                            if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
+                            if (Dr["ApellidoPat"] != DBNull.Value) { Entity.ApellidoPat = (string)Dr["ApellidoPat"]; }
+                            if (Dr["ApellidoMat"] != DBNull.Value) { Entity.ApellidoMat = (string)Dr["ApellidoMat"]; }
+                            if (Dr["Dni"] != DBNull.Value) { Entity.Dni = (string)Dr["Dni"]; }
+                            if (Dr["Telefono"] != DBNull.Value) { Entity.Telefono = (string)Dr["Telefono"]; }
+                            if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
+                            if (Dr["FechaInicio"] != DBNull.Value) { Entity.FechaInicio = (DateTime)Dr["FechaInicio"]; }
+                            if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
+                          
+                            break;
+                            
+
+                        }
+                        return Entity;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         public List<ListaCliente> BuscarCliente(string Codigo,int Estado)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
@@ -99,6 +142,7 @@ namespace SK.ERP.DataAccess
                         new SqlParameter{ParameterName="@Telefono",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Telefono},
                         new SqlParameter{ParameterName="@TelefonoRef",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.TelefonoRef},
                         new SqlParameter{ParameterName="@FechaFin",SqlDbType=SqlDbType.Date,SqlValue=RequestBE.FechaFin},
+                        new SqlParameter{ParameterName="@FechaInicio",SqlDbType=SqlDbType.Date,SqlValue=RequestBE.FechaInicio},
                     };
                     var Dr = Ado.ExecNonQueryProc("usp_UpdateCliente", paramaters);
                     return true;
@@ -129,15 +173,17 @@ namespace SK.ERP.DataAccess
                 }
             }
         }
-        public bool ActivateCliente(DeleteClienteRequest RequestBE)
+        public bool ActivateCliente(ActivarClienteRequestBE RequestBE)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
                 try
                 {
+
+                    var StringIdClientes = String.Join(",", RequestBE.IdCliente);
                     var paramaters = new SqlParameter[]
                     {
-                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.IdCliente},
+                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=StringIdClientes},
 
                     };
                     var Dr = Ado.ExecNonQueryProc("usp_ActivarCliente", paramaters);

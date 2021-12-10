@@ -1,4 +1,5 @@
 ﻿using SK.ERP.Entities.DataAccess.Cliente.Request;
+using SK.ERP.Entities.DataAccess.Cliente.Response;
 using SK.ERP.Entities.DataAccess.Persona.Request;
 using SK.ERP.Entities.DataAccess.Persona.Response;
 using System;
@@ -12,6 +13,14 @@ namespace SK.ERP.Business.DataAccess
         public void Dispose()
         {
             GC.SuppressFinalize(this);
+        }
+
+        public ListaCLienteId GetListaClienteId(int IdCliente)
+        {
+            using (var DA = new SK.ERP.DataAccess.ClienteDA())
+            {
+                return DA.GetListaClienteId(IdCliente);
+            }
         }
         public List<ListaCliente> BuscarCliente(string Codigo, int Estado)
         {
@@ -41,7 +50,7 @@ namespace SK.ERP.Business.DataAccess
                 return DA.DeleteCliente(RequestBE);
             }
         }
-        public bool ActivateCliente(DeleteClienteRequest RequestBE)
+        public bool ActivateCliente(ActivarClienteRequestBE RequestBE)
         {
             using (var DA = new SK.ERP.DataAccess.ClienteDA())
             {

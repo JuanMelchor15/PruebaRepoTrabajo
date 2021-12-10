@@ -9,6 +9,8 @@ namespace SK.ER.Utilities.Keys
         public const string FORMAT_DATE = "{0:dd/MM/yyyy}";
         public const string FORMAT_DATE_HOUR = "{0:dd/MM/yyyy H:mm}";
         public const string FORMAT_HOUR = "{0:H:mm:ss}";
+
+        public const string Claim_userName = "UserName";
     }
     public static class Enums
     {
