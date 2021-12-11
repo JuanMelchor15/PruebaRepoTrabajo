@@ -18,7 +18,7 @@ namespace SK.ERP.DataAccess
             GC.SuppressFinalize(this);
         }
 
-        public ListaCLienteId GetListaClienteId (int IdCliente)
+        public ListaCLienteId GetListaClienteId(int IdCliente)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
@@ -28,7 +28,7 @@ namespace SK.ERP.DataAccess
                     var Paramaters = new SqlParameter[]
                     {
                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=IdCliente },
-                      
+
                     };
                     var Dr = Ado.ExecDataReaderProc("usp_GetClienteId", Paramaters);
                     {
@@ -36,7 +36,7 @@ namespace SK.ERP.DataAccess
                         while (Dr.Read())
                         {
                             Entity = new ListaCLienteId();
-                            
+
                             if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
                             if (Dr["ApellidoPat"] != DBNull.Value) { Entity.ApellidoPat = (string)Dr["ApellidoPat"]; }
                             if (Dr["ApellidoMat"] != DBNull.Value) { Entity.ApellidoMat = (string)Dr["ApellidoMat"]; }
@@ -45,9 +45,9 @@ namespace SK.ERP.DataAccess
                             if (Dr["TelefonoRef"] != DBNull.Value) { Entity.TelefonoRef = (string)Dr["TelefonoRef"]; }
                             if (Dr["FechaInicio"] != DBNull.Value) { Entity.FechaInicio = (DateTime)Dr["FechaInicio"]; }
                             if (Dr["FechaFin"] != DBNull.Value) { Entity.FechaFin = (DateTime)Dr["FechaFin"]; }
-                          
+
                             break;
-                            
+
 
                         }
                         return Entity;
@@ -60,7 +60,7 @@ namespace SK.ERP.DataAccess
                 }
             }
         }
-        public List<ListaCliente> BuscarCliente(string Codigo,int Estado)
+        public List<ListaCliente> BuscarCliente(string Codigo, int Estado)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
@@ -153,18 +153,23 @@ namespace SK.ERP.DataAccess
                 }
             }
         }
-        public bool DeleteCliente(DeleteClienteRequest  RequestBE)
+        public bool DeleteCliente(DeleteClienteRequest RequestBE)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
                 try
                 {
-                    var paramaters = new SqlParameter[]
+                    foreach (var item in RequestBE.IdCliente)
                     {
-                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.IdCliente},
-                        
-                    };
-                    var Dr = Ado.ExecNonQueryProc("usp_DeleteCliente", paramaters);
+
+
+                        var paramaters = new SqlParameter[]
+                        {
+                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=item},
+
+                        };
+                        var Dr = Ado.ExecNonQueryProc("usp_DeleteCliente", paramaters);
+                    }
                     return true;
                 }
                 catch (Exception Ex)
@@ -180,13 +185,19 @@ namespace SK.ERP.DataAccess
                 try
                 {
 
-                    var StringIdClientes = String.Join(",", RequestBE.IdCliente);
-                    var paramaters = new SqlParameter[]
+                    foreach (var item in RequestBE.IdCliente)
                     {
-                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=StringIdClientes},
 
-                    };
-                    var Dr = Ado.ExecNonQueryProc("usp_ActivarCliente", paramaters);
+
+                        var paramaters = new SqlParameter[]
+                        {
+                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=item},
+
+                        };
+
+                        var Dr = Ado.ExecNonQueryProc("usp_ActivarCliente", paramaters);
+
+                    }
                     return true;
                 }
                 catch (Exception Ex)

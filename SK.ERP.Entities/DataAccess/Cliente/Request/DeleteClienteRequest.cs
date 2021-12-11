@@ -6,6 +6,6 @@ namespace SK.ERP.Entities.DataAccess.Cliente.Request
 {
     public class DeleteClienteRequest
     {
-        public int IdCliente { get; set; }
+        public List<string>IdCliente { get; set; }
     }
 }
