@@ -43,18 +43,11 @@ namespace SK.ERP.Business.DataAccess
                 return DA.UpdateCliente(RequestBE);
             }
         }
-        public bool DeleteCliente(DeleteClienteRequest RequestBE)
+        public bool DeleteActivarCliente(DeleteActivarClienteRequestBE RequestBE)
         {
             using (var DA = new SK.ERP.DataAccess.ClienteDA())
             {
-                return DA.DeleteCliente(RequestBE);
-            }
-        }
-        public bool ActivateCliente(ActivarClienteRequestBE RequestBE)
-        {
-            using (var DA = new SK.ERP.DataAccess.ClienteDA())
-            {
-                return DA.ActivateCliente(RequestBE);
+                return DA.DeleteActivarCliente(RequestBE);
             }
         }
     }

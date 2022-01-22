@@ -37,6 +37,7 @@ namespace SK.ERP.DataAccess
                         {
                             Entity = new ListaCLienteId();
 
+                            if (Dr["IdCliente"] != DBNull.Value) { Entity.IdCliente = (int)Dr["IdCliente"]; }
                             if (Dr["Nombres"] != DBNull.Value) { Entity.Nombres = (string)Dr["Nombres"]; }
                             if (Dr["ApellidoPat"] != DBNull.Value) { Entity.ApellidoPat = (string)Dr["ApellidoPat"]; }
                             if (Dr["ApellidoMat"] != DBNull.Value) { Entity.ApellidoMat = (string)Dr["ApellidoMat"]; }
@@ -153,32 +154,8 @@ namespace SK.ERP.DataAccess
                 }
             }
         }
-        public bool DeleteCliente(DeleteClienteRequest RequestBE)
-        {
-            using (var Ado = new SQLServer(GeneralModel.ConnectionString))
-            {
-                try
-                {
-                    foreach (var item in RequestBE.IdCliente)
-                    {
-
-
-                        var paramaters = new SqlParameter[]
-                        {
-                        new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=item},
-
-                        };
-                        var Dr = Ado.ExecNonQueryProc("usp_DeleteCliente", paramaters);
-                    }
-                    return true;
-                }
-                catch (Exception Ex)
-                {
-                    throw Ex;
-                }
-            }
-        }
-        public bool ActivateCliente(ActivarClienteRequestBE RequestBE)
+      
+        public bool DeleteActivarCliente(DeleteActivarClienteRequestBE RequestBE)
         {
             using (var Ado = new SQLServer(GeneralModel.ConnectionString))
             {
@@ -192,10 +169,11 @@ namespace SK.ERP.DataAccess
                         var paramaters = new SqlParameter[]
                         {
                         new SqlParameter{ParameterName="@IdCliente",SqlDbType=SqlDbType.VarChar,SqlValue=item},
+                        new SqlParameter{ParameterName="@Estado",SqlDbType=SqlDbType.VarChar,SqlValue=RequestBE.Estado},
 
                         };
 
-                        var Dr = Ado.ExecNonQueryProc("usp_ActivarCliente", paramaters);
+                        var Dr = Ado.ExecNonQueryProc("usp_DeleteActivarCliente", paramaters);
 
                     }
                     return true;

@@ -6,6 +6,7 @@ namespace SK.ERP.Entities.DataAccess.Cliente.Response
 {
     public class ListaCLienteId
     {
+        public int IdCliente { get; set; }
         public string Nombres { get; set; }
         public string ApellidoPat { get; set; }
         public string ApellidoMat { get; set; }

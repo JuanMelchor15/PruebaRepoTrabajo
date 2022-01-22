@@ -4,8 +4,9 @@ using System.Text;
 
 namespace SK.ERP.Entities.DataAccess.Cliente.Request
 {
-    public class DeleteClienteRequest
+    public class DeleteActivarClienteRequestBE
     {
-        public List<string>IdCliente { get; set; }
+        public List<string> IdCliente { get; set; }
+        public int Estado { get; set; }
     }
 }

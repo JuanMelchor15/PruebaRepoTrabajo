@@ -86,26 +86,13 @@ namespace SK.ERP.SERVICE.Controllers
             return Ok(GenericResponse);
         }
         [HttpPost]
-        [Route("DeleteCliente")]
-        public IActionResult DeleteCliente(DeleteClienteRequest ResquestBE)
+        [Route("DeleteActiveCliente")]
+        public IActionResult ActivateCliente(DeleteActivarClienteRequestBE ResquestBE)
         {
             var GenericResponse = new GenericResponseObject();
             using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
             {
-                var data = BL.DeleteCliente(ResquestBE);
-                GenericResponse.Code = Enums.eCode.OK;
-                GenericResponse.Data = data;
-            }
-            return Ok(GenericResponse);
-        }
-        [HttpPost]
-        [Route("ActivateCliente")]
-        public IActionResult ActivateCliente(ActivarClienteRequestBE ResquestBE)
-        {
-            var GenericResponse = new GenericResponseObject();
-            using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
-            {
-                var data = BL.ActivateCliente(ResquestBE);
+                var data = BL.DeleteActivarCliente(ResquestBE);
                 GenericResponse.Code = Enums.eCode.OK;
                 GenericResponse.Data = data;
             }
