@@ -20,5 +20,11 @@ namespace SK.ER.Utilities.Methods
             DateTime dt_peru = TimeZoneInfo.ConvertTime(DateTime.Now, info);
             return dt_peru;
         }
+        public static TimeSpan DiasRestantes(DateTime Fecha1, DateTime Fecha2)
+        {
+
+            TimeSpan Diff_dates = Fecha2.Subtract(Fecha1);
+            return Diff_dates;
+        }
     }
 }

@@ -57,7 +57,8 @@ namespace SK.ERP.Business.DataAccess
                                     //new Claim(type: Constants.Claim_dataBussinessType, value: LoginResponse.BussinessType.ToString()),
                                     //new Claim(type: Constants.Claim_tokenBAZ, value: tokenBAZ),
                                     //new Claim(type: Constants.Claim_userCode, value: LoginResponse.Code),
-                                    new Claim(type: Constants.Claim_userName, value: LoginResponse.NombreEmpleado),
+                                    new Claim(type: Constants.Claim_userName, value: LoginResponse.NombreUsuario),
+                                    new Claim(type: Constants.Claim_userPerfil, value: LoginResponse.NombrePerfil),
                                     new Claim(type:JwtRegisteredClaimNames.Jti,value:Guid.NewGuid().ToString())
                                 };
 

@@ -54,6 +54,7 @@ namespace SK.ERP.SERVICE.Controllers
             using (var BL = new SK.ERP.Business.DataAccess.ClienteBL())
             {
                 var data = BL.BuscarCliente(Codigo,Estado);
+                
                 GenericResponse.Code = Enums.eCode.OK;
                 GenericResponse.Data = data;
             }

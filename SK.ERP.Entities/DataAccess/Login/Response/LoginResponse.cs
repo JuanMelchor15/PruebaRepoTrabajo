@@ -6,6 +6,7 @@ namespace SK.ERP.Entities.DataAccess.Login.Response
 {
     public class LoginResponse
     {
-        public string NombreEmpleado { get; set; }
+        public string NombreUsuario { get; set; }
+        public string NombrePerfil { get; set; }
     }
 }

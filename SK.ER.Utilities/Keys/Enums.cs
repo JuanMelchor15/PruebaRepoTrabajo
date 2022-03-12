@@ -11,6 +11,7 @@ namespace SK.ER.Utilities.Keys
         public const string FORMAT_HOUR = "{0:H:mm:ss}";
 
         public const string Claim_userName = "UserName";
+        public const string Claim_userPerfil = "UserPerfil";
     }
     public static class Enums
     {
@@ -24,7 +25,7 @@ namespace SK.ER.Utilities.Keys
         }
         public enum eTypeTemplate : int
         {
-           
+
         }
     }
 }

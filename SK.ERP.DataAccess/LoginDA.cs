@@ -33,7 +33,8 @@ namespace SK.ERP.DataAccess
                         while (Dr.Read())
                         {
                             Entity = new LoginResponse();
-                            if (Dr["NombreEmpleado"] != DBNull.Value) { Entity.NombreEmpleado = (string)Dr["NombreEmpleado"]; }
+                            if (Dr["NombreUsuario"] != DBNull.Value) { Entity.NombreUsuario = (string)Dr["NombreUsuario"]; }
+                            if (Dr["NombrePerfil"] != DBNull.Value) { Entity.NombrePerfil = (string)Dr["NombrePerfil"]; }
                             break;
                         }
                         return Entity;
