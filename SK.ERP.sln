@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SK.ERP.SERVICE", "SK.ERP.SERVICE\SK.ERP.SERVICE.csproj", "{8E74E611-7AAF-4BE4-A80F-CCA5284C0234}"
 EndProject
@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SK.ER.Utilities", "SK.ER.Ut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{7E7FD65C-E0B2-4388-B90C-E44928E1CC8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SK.ERP.DataAccess", "SK.ERP.DataAccess\SK.ERP.DataAccess.csproj", "{70C31325-A2E7-46B3-889C-ADDC84EF9438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SK.ERP.DataAccess", "SK.ERP.DataAccess\SK.ERP.DataAccess.csproj", "{70C31325-A2E7-46B3-889C-ADDC84EF9438}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{35D0939A-F4CD-4035-B4D2-966E7B9814A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{70C31325-A2E7-46B3-889C-ADDC84EF9438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C31325-A2E7-46B3-889C-ADDC84EF9438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C31325-A2E7-46B3-889C-ADDC84EF9438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D0939A-F4CD-4035-B4D2-966E7B9814A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D0939A-F4CD-4035-B4D2-966E7B9814A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D0939A-F4CD-4035-B4D2-966E7B9814A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D0939A-F4CD-4035-B4D2-966E7B9814A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
